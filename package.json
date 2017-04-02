@@ -10,8 +10,7 @@
     "update-test": "npm run test -- -u",
     "build": "webpack --progress",
     "dev": "webpack-dev-server",
-    "_lint": "eslint js/**/*.js server.js",
-    "lint": "semistandard",
+    "lint": "eslint js/**/*.js server.js webpack.config.js",
     "watch": "webpack --watch"
   },
   "dependencies": {
@@ -42,6 +41,7 @@
     "enzyme": "2.0.0",
     "enzyme-to-json": "^1.3.0",
     "eslint": "3.6.1",
+    "eslint-config-semistandard": "^8.0.0",
     "eslint-config-standard": "6.1.0",
     "eslint-config-standard-jsx": "3.1.0",
     "eslint-config-standard-react": "4.1.0",

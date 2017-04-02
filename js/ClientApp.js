@@ -1,36 +1,26 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { render } from 'react-dom';
 
-import MyTitle from './MyTitle';
+import '../public/normalize.css';
+import '../public/style.css';
 
-const MyFirstComponent = React.createClass({
+const App = React.createClass({
   render: function () {
     return (
-      React.DOM.div(null,
-        // React.DOM.h1(null, 'This is my first component')
-
-        // React.createElement(MyTitle),
-        // React.createElement(MyTitle),
-        // React.createElement(MyTitle),
-        // React.createElement(MyTitle)
-
-        // MyTitleFactory({ title: 'One', color: 'peru' }),
-        // MyTitleFactory({ title: 'Two', color: 'mediumaquamarine' }),
-        // MyTitleFactory({ title: 'Three', color: 'rebeccapurple' }),
-        // MyTitleFactory({ title: 'Four', color: 'green' })
-
-        <div>
-          <MyTitle title="One" color="peru" />
-          <MyTitle title="Two" color="mediumaquamarine" />
-          <MyTitle title="Three" color="rebeccapurple" />
-          <MyTitle title="Four" color="green" />
+      <div className='app'>
+        <div className='landing'>
+          <h1>svideo</h1>
+          <input type='text' placeholder='Search' />
+          <a>or Browse all</a>
         </div>
-      )
+      </div>
     );
   }
 });
 
-ReactDOM.render(
-  React.createElement(MyFirstComponent),
+render(
+  <App />,
   document.getElementById('app')
 );
+
+// http://akamai.redystream.com/PHpDbTKhHUXgwOd0gscCq50PyhuOS77CQ7qSaXKw2mf4yVoDLGR7X3GajD5kriquSbQLMBQvOUEacfMm0fGy01RQrCiyeCuwYS/index.m3u8

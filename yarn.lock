@@ -1704,6 +1704,10 @@ escope@^3.6.0:
     esrecurse "^4.1.0"
     estraverse "^4.1.1"
 
+eslint-config-semistandard@^8.0.0:
+  version "8.0.0"
+  resolved "https://registry.yarnpkg.com/eslint-config-semistandard/-/eslint-config-semistandard-8.0.0.tgz#fb8239379a1dcc114cde7a7dcbbc80beea3334b0"
+
 eslint-config-standard-jsx@3.1.0, eslint-config-standard-jsx@^3.0.0:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/eslint-config-standard-jsx/-/eslint-config-standard-jsx-3.1.0.tgz#47511220743199b1fe0b0ad12279989f9250be55"

@@ -8,6 +8,9 @@ module.exports = {
     path: path.join(__dirname, 'public'),
     filename: 'bundle.js'
   },
+  devServer: {
+    publicPath: '/public/'
+  },
   resolve: {
     extensions: ['.js', '.json']
   },
@@ -19,9 +22,28 @@ module.exports = {
   module: {
     rules: [
       {
+        enforce: 'pre',
+        include: path.resolve(__dirname, 'js'),
+        test: /\.js$/,
+        loader: 'eslint-loader'
+      },
+      {
         include: path.resolve(__dirname, 'js'),
         test: /\.js$/,
         loader: 'babel-loader'
+      },
+      {
+        include: path.resolve(__dirname, 'public'),
+        test: /\.css/,
+        use: [
+          'style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              url: false // So webpack doesn't inline images...
+            }
+          }
+        ]
       }
     ]
   }
