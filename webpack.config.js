@@ -9,7 +9,8 @@ module.exports = {
     filename: 'bundle.js'
   },
   devServer: {
-    publicPath: '/public/'
+    publicPath: '/public/',
+    historyApiFallback: true
   },
   resolve: {
     extensions: ['.js', '.json']
@@ -26,6 +27,10 @@ module.exports = {
         include: path.resolve(__dirname, 'js'),
         test: /\.js$/,
         loader: 'eslint-loader'
+      },
+      {
+        test: /\.json$/,
+        loader: 'json-loader'
       },
       {
         include: path.resolve(__dirname, 'js'),
