@@ -1,6 +1,16 @@
 import React from 'react';
+const { shape, string } = React.PropTypes;
 
 const ShowCard = React.createClass({
+  propTypes: {
+    show: shape({
+      poster: string,
+      title: string,
+      year: string,
+      description: string
+    })
+  },
+
   render () {
     const show = this.props.show;
     return (
