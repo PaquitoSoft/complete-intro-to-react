@@ -1,12 +1,16 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { BrowserRouter, Match } from 'react-router';
+import preload from '../public/data.json';
 
 import '../public/normalize.css';
 import '../public/style.css';
 
 import Landing from './Landing';
 import Search from './Search';
+import Details from './Details';
+
+console.log('blah blah blah');
 
 const App = React.createClass({
   render: function () {
@@ -14,7 +18,18 @@ const App = React.createClass({
       <BrowserRouter>
         <div className='app'>
           <Match exactly pattern='/' component={Landing} />
-          <Match pattern='/search' component={Search} />
+          <Match
+            pattern='/search'
+            component={(props) => (<Search shows={preload.shows} {...props} />)}
+          />
+          <Match
+            pattern='/details/:id'
+            component={(props) => {
+              const show = preload.shows.find(_show => _show.imdbID === props.params.id);
+              console.log('Show details about to render:', show);
+              return (<Details show={show} {...props} />);
+            }}
+          />
         </div>
       </BrowserRouter>
     );
