@@ -1,7 +1,10 @@
 import React from 'react';
 import Header from './Header';
+// import axios from 'axios';
+import { connect } from 'react-redux';
+import { getOmdbDetails } from './actionCreators';
 
-const { shape, string } = React.PropTypes;
+const { shape, string, func } = React.PropTypes;
 
 const Details = React.createClass({
   propTypes: {
@@ -10,12 +13,41 @@ const Details = React.createClass({
       description: string,
       year: string,
       poster: string,
-      trailer: string
-    })
+      trailer: string,
+      omdbID: string
+    }),
+    omdbData: shape({
+      imdbID: string
+    }),
+    dispatch: func
+  },
+
+  // getInitialState () {
+  //   return { omdbData: {} };
+  // },
+
+  componentDidMount () {
+    // axios.get(`https://www.omdbapi.com/?i=${this.props.show.imdbID}`)
+    //   .then(response => {
+    //     this.setState({
+    //       omdbData: response.data
+    //     });
+    //   })
+    //   .catch(error => console.error('Axios error', error));
+    if (!this.props.omdbData.imdbRating) {
+      this.props.dispatch(getOmdbDetails(this.props.show.imdbID));
+    }
   },
 
   render () {
     const { title, description, year, poster, trailer } = this.props.show;
+    let rating;
+
+    if (this.props.omdbData.imdbRating) {
+      rating = (<h3>{this.props.omdbData.imdbRating}</h3>);
+    } else {
+      rating = (<img src='/public/img/loading.png' />);
+    }
 
     return (
       <div className='details'>
@@ -24,6 +56,7 @@ const Details = React.createClass({
         <section>
           <h1>{title}</h1>
           <h2>({year})</h2>
+          {rating}
           <img src={`/public/img/posters/${poster}`} />
           <p>{description}</p>
         </section>
@@ -40,4 +73,10 @@ const Details = React.createClass({
   }
 });
 
-export default Details;
+function mapStateToProps (state, ownProps) {
+  return {
+    omdbData: state.omdbData[ownProps.show.imdbID] || {}
+  };
+}
+
+export default connect(mapStateToProps)(Details);
