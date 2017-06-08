@@ -7,8 +7,8 @@ import store from './store';
 import AsyncRoute from './AsyncRoute';
 
 // import Landing from './Landing';
-import Search from './Search';
-import Details from './Details';
+// import Search from './Search';
+// import Details from './Details';
 
 if (global) {
   // Fake async System.import in node env
@@ -36,14 +36,27 @@ const App = () => {
 
         <Match
           pattern='/search'
-          component={(props) => (<Search shows={preload.shows} {...props} />)}
+          component={props => {
+            return (
+              <AsyncRoute
+                props={Object.assign({shows: preload.shows}, props)}
+                loadingPromise={System.import('./Search')}
+              />
+            );
+          }
+      }
         />
         <Match
           pattern='/details/:id'
           component={(props) => {
             const show = preload.shows.find(_show => _show.imdbID === props.params.id);
-            console.log('Show details about to render:', show);
-            return (<Details show={show} {...props} />);
+            const _props = Object.assign({show}, props);
+            return (
+              <AsyncRoute
+                props={_props}
+                loadingPromise={System.import('./Details')}
+              />
+            );
           }}
         />
       </div>

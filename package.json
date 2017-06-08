@@ -12,7 +12,8 @@
     "dev": "webpack-dev-server",
     "lint": "eslint js/**/*.js server.js webpack.config.js",
     "watch": "webpack --watch",
-    "coverage": "npm run test -- --converage"
+    "coverage": "npm run test -- --converage",
+	"start": "NODE_ENV=server nodemon server.js"
   },
   "dependencies": {
     "axios": "0.15.2",
